@@ -9,6 +9,8 @@ require("./config/database");
 // Require controllers here
 
 const app = express();
+const locationRouter = require('./routes/api/locations')
+const userRouter = require('./routes/api/users')
 
 // add in when the app is ready to be deployed
 // app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
@@ -21,7 +23,8 @@ app.use(express.json());
 // the user information to req.user
 app.use(require("./config/auth"));
 // api routes must be before the "catch all" route
-app.use("/api/users", require("./routes/api/users"));
+app.use("/api/locations", locationRouter);
+app.use("/api/users", userRouter);
 
 // "catch all" route
 app.get('/*', function(req, res) {

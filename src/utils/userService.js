@@ -3,15 +3,20 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/users/';
 
 function signup(user) {
+  console.log("hitting user service dot signup");
+  console.log(user, "<- user, being sent in fetch")
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
-    headers: new Headers({'Content-Type': 'application/json'}),  // If you are sending a file/photo over
-    // what do datatype do you need to change this too?
+    headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(user)
   })
   .then(res => {
-    if (res.ok) return res.json();
+    if (res.ok) {
+      console.log(res, "<- 'res.ok'? ");
+      return res.json();
+    }
     // Probably a duplicate email
+    console.log(res, "<- res after not .ok");
     throw new Error('Email already taken!');
   })
   // Parameter destructuring!
