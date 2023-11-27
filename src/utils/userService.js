@@ -3,8 +3,8 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/users/';
 
 function signup(user) {
-  console.log("hitting user service dot signup");
-  console.log(user, "<- user, being sent in fetch")
+  // console.log("hitting user service dot signup");
+  // console.log(user, "<- user, being sent in fetch")
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
@@ -16,7 +16,6 @@ function signup(user) {
       return res.json();
     }
     // Probably a duplicate email
-    console.log(res, "<- res after not .ok");
     throw new Error('Email already taken!');
   })
   // Parameter destructuring!

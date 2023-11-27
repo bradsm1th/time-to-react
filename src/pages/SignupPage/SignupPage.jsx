@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import Header from "../../components/Header/Header";
 // import ErrorMessage from "../../components/ErrorMessage/ErrorMessage"
 
 import userService from '../../utils/userService';
 
-export default function SignupPage(props) {
-  // console.log(props, "<- props from App.jsx")
+export default function SignupPage({prop, processSignupOrLogin}) {
 
   const [newUser, setNewUser] = useState({
     username: '',
@@ -15,6 +15,8 @@ export default function SignupPage(props) {
   });
 
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   // handlers
   function handleChange(evt) {
@@ -26,11 +28,13 @@ export default function SignupPage(props) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    console.log("submitted!");
+    // console.log("submitted!");
 
     try {
       // no formData object needed (no file to upload)
       await userService.signup(newUser);
+      processSignupOrLogin();
+      navigate('/');
     } catch (error) {
       console.log(error.message, "<- caught error"); // <- the error message comes from the throw statement in utils/signup functions
       // setError('Try signing up again')
@@ -39,8 +43,8 @@ export default function SignupPage(props) {
 
   return (
     <>
-      <Header prop={props.prop}/>
-      <div>Signup Pageeeeee ({props.prop})</div>
+      <Header prop={prop}/>
+      <div>Signup Pageeeeee ({prop})</div>
       <form onSubmit={handleSubmit}>
         <label>Username:
           <input
@@ -75,6 +79,7 @@ export default function SignupPage(props) {
           />
         </label>
         <button type="submit">Sign up!</button>
+        {error ? <ErrorMessage error={error}/> : null}
       </form>
     </>
   );
