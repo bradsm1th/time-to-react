@@ -1,7 +1,7 @@
-// import { Header, Segment} from 'semantic-ui-react';
+import { Header, Segment} from 'semantic-ui-react';
 
-export default function Header({prop}) {
+export default function Topper() {
   return (
-    <h3>I'm a header <small>(and <mark>{prop}</mark>)</small></h3>
+    <Header as='h1'>Weather (or not)</Header>
   )
 }

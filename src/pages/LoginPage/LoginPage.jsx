@@ -2,7 +2,9 @@ import React from 'react';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
-import Header from "../../components/Header/Header"
+import Topper from "../../components/Header/Header";
+
+import { Grid, Segment, Form, Input, Button } from 'semantic-ui-react';
 
 import userService from '../../utils/userService';
 
@@ -12,6 +14,7 @@ export default function LoginPage({ prop, processSignupOrLogin }) {
     email: '',
     password: ''
   })
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -28,6 +31,9 @@ export default function LoginPage({ prop, processSignupOrLogin }) {
     try {
       // see if user's token 1) exists and 2) is valid for this user's name/PW
       await userService.login(loggingPerson);
+
+      navigate('/');
+      processSignupOrLogin(); // update state to reflect this user
     } catch (error) {
       console.log(error, "<-login handlesubmit error")
     }
@@ -36,26 +42,35 @@ export default function LoginPage({ prop, processSignupOrLogin }) {
 
   return (
     <>
-      <Header prop={prop} />
-      <div>Login Pageeeeee ({prop})</div>
-      <form onSubmit={handleSubmit}>
-        <label>Email:
-          <input
-            type="Email"
-            onChange={handleChange}
-            name='email'
-          />
-        </label>
-        <label>Password:
-          <input
-            type="password"
-            onChange={handleChange}
-            name='password'
-          />
-        </label>
-        <button type="submit">Log in!</button>
+      <Topper/>
+      {/* <Segment style={{ maxWidth: 600 }} > */}
+        <Form style={{ maxWidth: 600 }} 
+          size='large'
+          onSubmit={handleSubmit}>
+          <Form.Field inline align='right' required>
+            <label htmlFor="email">Email</label>
+            <Input
+              id="email"
+              name='email'
+              onChange={handleChange}
+              placeholder="Email address"
+              type="email"
+            />
+          </Form.Field>
+          <Form.Field inline align='right' required>
+            <label htmlFor="pw">Password</label>
+            <Input
+              id="pw"
+              name='password'
+              onChange={handleChange}
+              placeholder="Password"
+              type="password"
+            />
+          </Form.Field>
+          <Button type='submit' align='center' color='orange' inverted size='medium'>Log in</Button>
         {/* {error ? <ErrorMessage error={error} /> : null} */}
-      </form>
+        </Form>
+      {/* </Segment > */}
     </>
   );
 }

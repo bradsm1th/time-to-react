@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import Header from "../../components/Header/Header";
-// import ErrorMessage from "../../components/ErrorMessage/ErrorMessage"
+import Topper from "../../components/Header/Header";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage"
+import { Grid, Segment, Form, Input, Button } from 'semantic-ui-react';
+
 
 import userService from '../../utils/userService';
 
@@ -10,6 +12,7 @@ export default function SignupPage({prop, processSignupOrLogin}) {
   const [newUser, setNewUser] = useState({
     username: '',
     email: '',
+    homeLocation: '',
     password: '',
     passwordAgain: '',
   });
@@ -43,44 +46,53 @@ export default function SignupPage({prop, processSignupOrLogin}) {
 
   return (
     <>
-      <Header prop={prop}/>
-      <div>Signup Pageeeeee ({prop})</div>
-      <form onSubmit={handleSubmit}>
-        <label>Username:
-          <input
-            type="text"
-            value={newUser.username}
-            onChange={handleChange}
-            name='username'
-          />
-        </label>
-        <label>Email:
-          <input
-            type="Email"
-            value={newUser.email}
-            onChange={handleChange}
-            name='email'
-          />
-        </label>
-        <label>Password:
-          <input
-            type="password"
-            value={newUser.password}
-            onChange={handleChange}
-            name='password'
-          />
-        </label>
-        <label>Password Again:
-          <input
-            type="password"
-            value={newUser.passwordAgain}
-            onChange={handleChange}
-            name='passwordAgain'
-          />
-        </label>
-        <button type="submit">Sign up!</button>
-        {error ? <ErrorMessage error={error}/> : null}
-      </form>
+      <Topper/>
+      <Form style={{ maxWidth: 600 }} 
+          size='large'
+          onSubmit={handleSubmit}>
+          <Form.Field inline align='right' required>
+            <label htmlFor="username">Username</label>
+            <Input
+              id="username"
+              name='username'
+              onChange={handleChange}
+              placeholder="username"
+              type="username"
+            />
+          </Form.Field>
+          <Form.Field inline align='right' required>
+            <label htmlFor="email">Email</label>
+            <Input
+              id="email"
+              name='email'
+              onChange={handleChange}
+              placeholder="email"
+              type="email"
+            />
+          </Form.Field>
+          <Form.Field inline align='right' required>
+            <label htmlFor="pw">Password</label>
+            <Input
+              id="pw"
+              name='password'
+              onChange={handleChange}
+              placeholder="password"
+              type="password"
+            />
+          </Form.Field>
+          <Form.Field inline align='right' required>
+            <label htmlFor="pw">Confirm your password</label>
+            <Input
+              id="pwAgain"
+              name='passwordAgain'
+              onChange={handleChange}
+              placeholder="confirm your password"
+              type="password"
+            />
+          </Form.Field>
+          <Button type='submit' align='center' color='teal' size='medium'>Sign up</Button>
+        {/* {error ? <ErrorMessage error={error} /> : null} */}
+        </Form>
     </>
   );
 }
