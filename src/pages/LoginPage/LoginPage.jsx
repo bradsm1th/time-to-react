@@ -2,14 +2,14 @@ import React from 'react';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
-import Topper from "../../components/Header/Header";
+import Topper from "../../components/Topper/Topper";
 
 import { Grid, Segment, Form, Input, Button } from 'semantic-ui-react';
 
 import userService from '../../utils/userService';
 
 
-export default function LoginPage({ prop, processSignupOrLogin }) {
+export default function LoginPage({ processSignupOrLogin}) {
   const [loggingPerson, setLoggingPerson] = useState({
     email: '',
     password: ''
@@ -43,7 +43,6 @@ export default function LoginPage({ prop, processSignupOrLogin }) {
   return (
     <>
       <Topper/>
-      {/* <Segment style={{ maxWidth: 600 }} > */}
         <Form style={{ maxWidth: 600 }} 
           size='large'
           onSubmit={handleSubmit}>
@@ -70,7 +69,6 @@ export default function LoginPage({ prop, processSignupOrLogin }) {
           <Button type='submit' align='center' color='orange' inverted size='medium'>Log in</Button>
         {/* {error ? <ErrorMessage error={error} /> : null} */}
         </Form>
-      {/* </Segment > */}
     </>
   );
 }

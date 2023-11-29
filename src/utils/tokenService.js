@@ -27,7 +27,9 @@ function setToken(token) {
   }
   
   function removeToken() {
+    // console.log("token about to be removed");
     localStorage.removeItem('token');
+    // console.log("token should be gone now");
   }
   
   export default {

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import Topper from "../../components/Header/Header";
+import Topper from "../../components/Topper/Topper";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage"
 import { Grid, Segment, Form, Input, Button } from 'semantic-ui-react';
 
 
 import userService from '../../utils/userService';
 
-export default function SignupPage({prop, processSignupOrLogin}) {
+export default function SignupPage({ processSignupOrLogin}) {
 
   const [newUser, setNewUser] = useState({
     username: '',
@@ -57,7 +57,7 @@ export default function SignupPage({prop, processSignupOrLogin}) {
               name='username'
               onChange={handleChange}
               placeholder="username"
-              type="username"
+              type="text"
             />
           </Form.Field>
           <Form.Field inline align='right' required>
@@ -68,6 +68,16 @@ export default function SignupPage({prop, processSignupOrLogin}) {
               onChange={handleChange}
               placeholder="email"
               type="email"
+            />
+          </Form.Field>
+          <Form.Field inline align='right' required>
+            <label htmlFor="location">Primary City</label>
+            <Input
+              id="location"
+              name='homeLocation'
+              onChange={handleChange}
+              placeholder="location"
+              type="text"
             />
           </Form.Field>
           <Form.Field inline align='right' required>

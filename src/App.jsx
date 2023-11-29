@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Route, Routes } from "react-router-dom";
+import { useState } from 'react';
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 
 import userService from "./utils/userService"
@@ -7,12 +7,6 @@ import userService from "./utils/userService"
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from './pages/SignupPage/SignupPage'
 import MainPage from './pages/MainPage/MainPage'
-
-// convert Kelvin to Fahrenheit
-// …https://www.wikihow.com/Convert-Kelvin-to-Fahrenheit-or-Celsius
-function KtoF(tempInK) {
-  return 1.8 * (tempInK - 273) + 32;
-}
 
 
 export default function App() {
@@ -26,7 +20,9 @@ export default function App() {
 
 
   function logout() {
+    // console.log("logout should be happening…")
     userService.logout();
+    // console.log("logout should've just happened…")
     setUser(null);
   }
 
@@ -42,10 +38,13 @@ export default function App() {
           path="/signup" 
           element={<SignupPage processSignupOrLogin={processSignupOrLogin} />}
         />
+        <Route
+          path="*"
+          element={<Navigate to='/login' />}
+          />
       </Routes>
     )
   }
-
 
   return (
     <Routes>
@@ -53,16 +52,19 @@ export default function App() {
         path="/"
         element={<MainPage
           currentUser={user}
+          logout={logout}
         />}
       />
       <Route
         path="/login"
         element={<LoginPage
-          processSignupOrLogin={processSignupOrLogin} />} />
+          processSignupOrLogin={processSignupOrLogin}
+           />} />
       <Route
         path="/signup"
         element={<SignupPage
-          processSignupOrLogin={processSignupOrLogin} />} />
+          processSignupOrLogin={processSignupOrLogin}
+          />} />
     </Routes>
   );
 }
