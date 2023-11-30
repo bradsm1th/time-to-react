@@ -1,4 +1,4 @@
-import { Header, Divider, Grid } from 'semantic-ui-react';
+import { Header, Divider, Card } from 'semantic-ui-react';
 import tokenService from '../../utils/tokenService';
 
 export default function LocationCard({ location, getLocations }) {
@@ -30,24 +30,30 @@ export default function LocationCard({ location, getLocations }) {
   }
 
   return (
-    <>
-      {/* <p>I'm a location card</p> */}
-      {/* <Grid columns={2}> */}
-      {/* <Grid.Row> */}
-      <Divider horizontal>
-        <Header as='h2'>{location.residentName}</Header>
-        {/* <p style={{color: 'crimson'}}>Delete this person</p> */}
-      </Divider>
-      <p>({location.residentName} is one of {location.addedBy.username}'s people. They're in <strong>{location.cityName}</strong>.)</p>
-      <form
-        onSubmit={handleDelete}
-        id={location._id}
-      >
-        <button
-          style={{ backgroundColor: 'orangered', color: 'white', marginBlockEnd: '2em' }}>TEST DELETE</button>
-      </form>
-      {/* </Grid.Row> */}
-      {/* // </Grid> */}
-    </>
+      <Card>
+        <Card.Content>
+          <Divider horizontal>
+            <Card.Header>{location.residentName}</Card.Header>
+            {/* <p style={{color: 'crimson'}}>Delete this person</p> */}
+          </Divider>
+          <Card.Meta>
+            {/* {location.residentName} is  */}
+            One of {location.addedBy.username}'s people
+          </Card.Meta>
+          <Card.Description>
+            <strong>{location.cityName}</strong>
+          </Card.Description>
+          <Card.Description>
+            <form
+              onSubmit={handleDelete}
+              id={location._id}
+            >
+              <button
+                style={{ backgroundColor: 'orangered', color: 'white', marginBlockStart: '1em' }}>Delete</button>
+            </form>
+          </Card.Description>
+        </Card.Content>
+      </Card>
+
   )
 }

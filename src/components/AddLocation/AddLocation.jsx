@@ -49,13 +49,13 @@ export default function AddLocation({ friendLocations, setFriendLocations, getLo
       // console.log("hit handleSubmit try")
       addLocation(nextLocation);
       console.log(nextLocation, "<- should be next location to add")
+      getLocations();
 
       // update state to 'empty' for next location
       setNextLocation({
         cityName: '',
         residentName: ''
       })
-      getLocations();
       navigate('/');
 
     } catch (error) {

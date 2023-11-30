@@ -1,5 +1,5 @@
 import LocationCard from "../LocationCard/LocationCard";
-import { Grid } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 export default function Locations({ getWeather, children, friendLocations, getLocations }) {
 
@@ -7,33 +7,22 @@ export default function Locations({ getWeather, children, friendLocations, getLo
   const locations = friendLocations.map(location => {
     console.log(`${location.residentName} is in ${location.cityName}.`);
     // return <li>{location.residentName} is in {location.cityName}.</li>
-    return <LocationCard 
-      location={location} 
-      key={location._id}
-      getLocations={getLocations}
-    >
-      {location.residentName} is in {location.cityName}
-    </LocationCard>
+    return (
+      <LocationCard
+        location={location}
+        key={location._id}
+        getLocations={getLocations}
+      >
+      </LocationCard>
+    )
   }
   )
 
-  // console.log(locations, "<- locations before return to location card")
-
-
   return (
     <>
-    {/* <LocationCard></LocationCard> */}
-      {/* <ul> */}
-      {/* <Grid columns={3}> */}
-      {/* <Grid.Row> */}
-      {/* {locations} */}
-      {/* </Grid.Row> */}
-      {/* </Grid> */}
-
-      {/* </ul> */}
-      {/* <LocationCard location={location}> */}
-      {locations}
-      {/* </LocationCard> */}
+      <Card.Group itemsPerRow={3}>
+          {locations}
+      </Card.Group>
     </>
   )
 }

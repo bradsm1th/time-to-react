@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Topper from "../../components/Topper/Topper";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage"
 import { Grid, Segment, Form, Input, Button } from 'semantic-ui-react';
@@ -103,7 +103,7 @@ export default function SignupPage({ processSignupOrLogin}) {
           <Button type='submit' align='center' color='teal' size='medium'>Sign up</Button>
         {/* {error ? <ErrorMessage error={error} /> : null} */}
         </Form>
+        <p style={{paddingBlockStart:"1em"}}>Already done this? <Link to="/login">Log in</Link> instead!</p>
     </>
   );
 }
-

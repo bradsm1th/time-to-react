@@ -1,6 +1,6 @@
 import React from 'react';
 import './LoginPage.css';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react';
 import Topper from "../../components/Topper/Topper";
 
@@ -69,6 +69,7 @@ export default function LoginPage({ processSignupOrLogin}) {
           <Button type='submit' align='center' color='orange' inverted size='medium'>Log in</Button>
         {/* {error ? <ErrorMessage error={error} /> : null} */}
         </Form>
+        <p style={{paddingBlockStart:"1em"}}>Need to <Link to="/signup">sign up</Link> first?</p>
     </>
   );
 }
