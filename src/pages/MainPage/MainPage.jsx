@@ -6,7 +6,6 @@ import HeroCard from '../../components/HeroCard/HeroCard'
 import Locations from '../../components/Locations/Locations';
 import Topper from '../../components/Topper/Topper';
 import { KtoF } from '../../utils/tempConversions'
-import { set } from 'mongoose';
 
 
 export default function MainPage({ currentUser, logout }) {
@@ -17,26 +16,11 @@ export default function MainPage({ currentUser, logout }) {
   const [friendLocations, setFriendLocations] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  async function getLocations() {
-    try {
-      const response = await fetch("/api/locations", {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + tokenService.getToken()
-        }
-      })
-      const answer = await response.json();
-      console.log(answer, "<- answer to 'getLocations'");
 
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   useEffect(() => {
     // console.log("hello from useEffect");
     getWeather(currentUser.homeLocation);
-    // getWeather(currentUser.homeLocation);
 
     getLocations();
   }, [])
@@ -71,6 +55,22 @@ export default function MainPage({ currentUser, logout }) {
     }
   }
 
+  async function getLocations() {
+    try {
+      const response = await fetch("/api/locations", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + tokenService.getToken()
+        }
+      })
+      const answer = await response.json();
+      console.log(answer, "<- answer, aka server response to 'getLocations' req");
+      setFriendLocations(answer.locations);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function sanitizeFirstName(name) {
     return name.slice(0, 1).toUpperCase() + name.slice(1,).toLowerCase();
   }
@@ -82,7 +82,7 @@ export default function MainPage({ currentUser, logout }) {
   }
 
   return (
-    <Grid columns={1} >
+    <Grid columns={1} style={{width: 800}}>
       <Grid.Row>
         <Grid.Column>
           <Topper
@@ -103,7 +103,7 @@ export default function MainPage({ currentUser, logout }) {
       <Grid.Row>
         <Grid.Column>
           <Segment>
-            <AddLocation 
+            <AddLocation
               friendLocations={friendLocations}
               setFriendLocations={setFriendLocations}
               currentUser={currentUser}
@@ -113,7 +113,7 @@ export default function MainPage({ currentUser, logout }) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
-          <Locations 
+          <Locations
             getWeather={getWeather}
             friendLocations={friendLocations}
           >

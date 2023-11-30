@@ -90,7 +90,7 @@ export default function AddLocation({ friendLocations, setFriendLocations }) {
           />
         </Form.Field>
 
-        <Button type='submit'>Track this</Button>
+        <Button type='submit'>Track 'em!</Button>
 
       </Form>
 

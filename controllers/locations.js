@@ -35,9 +35,10 @@ async function index(req, res) {
     const locations = await Location
       .find(
         {addedBy: req.user._id}, 
-        {cityName: 1, residentName: 1}
+        {cityName: 1, residentName: 1, addedBy: 1}
         )
-    console.log(locations, "<- this user's added locations from Mongo");
+      .populate('addedBy');
+    // console.log(locations, "<- this user's added locations from Mongo");
     res.status(200).json({locations});
 
 
