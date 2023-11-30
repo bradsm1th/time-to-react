@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Form, Input, Button } from 'semantic-ui-react';
 import tokenService from '../../utils/tokenService';
 
-export default function AddLocation({ friendLocations, setFriendLocations }) {
+export default function AddLocation({ friendLocations, setFriendLocations, getLocations }) {
   const [nextLocation, setNextLocation] = useState({
     cityName: '',
     residentName: '',
@@ -55,7 +55,7 @@ export default function AddLocation({ friendLocations, setFriendLocations }) {
         cityName: '',
         residentName: ''
       })
-
+      getLocations();
       navigate('/');
 
     } catch (error) {

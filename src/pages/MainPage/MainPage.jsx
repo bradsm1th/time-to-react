@@ -14,9 +14,7 @@ export default function MainPage({ currentUser, logout }) {
 
   const [userLocation, setUserLocation] = useState({});
   const [friendLocations, setFriendLocations] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // console.log("hello from useEffect");
@@ -107,6 +105,7 @@ export default function MainPage({ currentUser, logout }) {
               friendLocations={friendLocations}
               setFriendLocations={setFriendLocations}
               currentUser={currentUser}
+              getLocations={getLocations}
             />
           </Segment>
         </Grid.Column>
@@ -117,7 +116,6 @@ export default function MainPage({ currentUser, logout }) {
             getWeather={getWeather}
             friendLocations={friendLocations}
           >
-            child from MainPage used in children
           </Locations>
         </Grid.Column>
       </Grid.Row>

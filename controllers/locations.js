@@ -3,7 +3,7 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
-module.exports = { create, index };
+module.exports = { create, deletePlace, index };
 
 async function create(req, res) {
   console.log("hitting create [location] controller")
@@ -24,6 +24,21 @@ async function create(req, res) {
   } catch (error) {
     console.log(error, "<- error in create location");
     res.json({error: "Problem in creating location in Mongo"})
+  }
+}
+
+
+async function deletePlace(req, res) {
+  console.log("hitting delete controller fn");
+  console.log(req.params, "<- req.params")
+  try {
+    const placeToRemove = await Location.deleteOne({_id: req.params.id})
+    console.log("should be deleted?");
+    // await placeToRemove.save();
+    res.status(200).json({response: placeToRemove});
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({error});
   }
 }
 
