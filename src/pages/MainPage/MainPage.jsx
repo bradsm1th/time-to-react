@@ -115,6 +115,7 @@ export default function MainPage({ currentUser, logout }) {
           <Locations
             getWeather={getWeather}
             friendLocations={friendLocations}
+            getLocations={getLocations}
           >
           </Locations>
         </Grid.Column>

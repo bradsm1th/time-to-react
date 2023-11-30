@@ -1,7 +1,7 @@
 import { Header, Divider, Grid } from 'semantic-ui-react';
 import tokenService from '../../utils/tokenService';
 
-export default function LocationCard({ location }) {
+export default function LocationCard({ location, getLocations }) {
 
   console.log(location, "<- location prop in LocationCard")
 
@@ -19,7 +19,9 @@ export default function LocationCard({ location }) {
       })
       console.log(response, "<- response from DELETE req");
 
-      
+      // update state
+      getLocations();
+
 
     } catch (error) {
       console.log(error);
@@ -36,7 +38,7 @@ export default function LocationCard({ location }) {
         <Header as='h2'>{location.residentName}</Header>
         {/* <p style={{color: 'crimson'}}>Delete this person</p> */}
       </Divider>
-      <p>(One of {location.addedBy.username}'s people.)</p>
+      <p>({location.residentName} is one of {location.addedBy.username}'s people. They're in <strong>{location.cityName}</strong>.)</p>
       <form
         onSubmit={handleDelete}
         id={location._id}

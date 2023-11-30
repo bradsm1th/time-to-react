@@ -1,13 +1,17 @@
 import LocationCard from "../LocationCard/LocationCard";
 import { Grid } from 'semantic-ui-react';
 
-export default function Locations({ getWeather, children, friendLocations }) {
+export default function Locations({ getWeather, children, friendLocations, getLocations }) {
 
   // i need a list of Location Cards
   const locations = friendLocations.map(location => {
     console.log(`${location.residentName} is in ${location.cityName}.`);
     // return <li>{location.residentName} is in {location.cityName}.</li>
-    return <LocationCard location={location} key={location._id}>
+    return <LocationCard 
+      location={location} 
+      key={location._id}
+      getLocations={getLocations}
+    >
       {location.residentName} is in {location.cityName}
     </LocationCard>
   }
