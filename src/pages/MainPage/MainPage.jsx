@@ -17,11 +17,15 @@ export default function MainPage({ currentUser, logout }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // console.log("hello from useEffect");
-    getWeather(currentUser.homeLocation);
-
+    getLoggedInUserWeather();
     getLocations();
   }, [])
+
+  async function getLoggedInUserWeather() {
+    let userWeather = await getWeather(currentUser.homeLocation)
+    setUserLocation(userWeather);
+
+  }
 
   async function getWeather(city) {
     try {
@@ -46,7 +50,8 @@ export default function MainPage({ currentUser, logout }) {
       // console.log((Date.now() / 1000).toFixed(0) - answer.dt)
 
       setLoading(false);
-      setUserLocation(answer);
+      // setUserLocation(answer);
+      return answer;
 
     } catch (error) {
       console.log(error, "<-- fetch error");
@@ -80,7 +85,7 @@ export default function MainPage({ currentUser, logout }) {
   }
 
   return (
-    <Grid columns={1} style={{width: 800}}>
+    <Grid columns={1} style={{ width: 800 }}>
       <Grid.Row>
         <Grid.Column>
           <Topper
@@ -116,6 +121,7 @@ export default function MainPage({ currentUser, logout }) {
             getWeather={getWeather}
             friendLocations={friendLocations}
             getLocations={getLocations}
+            sanitizeFirstName={sanitizeFirstName}
           >
           </Locations>
         </Grid.Column>

@@ -1,7 +1,7 @@
 # Weather (or not)
 This is a simple weather app using Openweather's ["Current Weather Data" API](https://openweathermap.org/current).
 
-After signing up, the app shows temperature and condition for your location.
+After signing up, the app shows the most recent temperature and conditions for **your** location.
 You can also add other locations / other people. My original goal was to see what the weather is like for my family members "right now". 
 
 ## Screenshots

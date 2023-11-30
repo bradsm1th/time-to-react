@@ -1,7 +1,7 @@
 import LocationCard from "../LocationCard/LocationCard";
 import { Card } from 'semantic-ui-react';
 
-export default function Locations({ getWeather, children, friendLocations, getLocations }) {
+export default function Locations({ getWeather, children, friendLocations, getLocations, sanitizeFirstName }) {
 
   // i need a list of Location Cards
   const locations = friendLocations.map(location => {
@@ -12,6 +12,7 @@ export default function Locations({ getWeather, children, friendLocations, getLo
         location={location}
         key={location._id}
         getLocations={getLocations}
+        sanitizeFirstName={sanitizeFirstName}
       >
       </LocationCard>
     )

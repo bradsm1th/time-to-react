@@ -1,7 +1,7 @@
 import { Header, Divider, Card } from 'semantic-ui-react';
 import tokenService from '../../utils/tokenService';
 
-export default function LocationCard({ location, getLocations }) {
+export default function LocationCard({ location, getLocations, sanitizeFirstName }) {
 
   console.log(location, "<- location prop in LocationCard")
 
@@ -38,7 +38,7 @@ export default function LocationCard({ location, getLocations }) {
           </Divider>
           <Card.Meta>
             {/* {location.residentName} is  */}
-            One of {location.addedBy.username}'s people
+            One of {sanitizeFirstName(location.addedBy.username)}'s people
           </Card.Meta>
           <Card.Description>
             <strong>{location.cityName}</strong>
