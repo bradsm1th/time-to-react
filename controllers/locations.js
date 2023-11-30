@@ -34,7 +34,6 @@ async function deletePlace(req, res) {
   try {
     const placeToRemove = await Location.deleteOne({_id: req.params.id})
     console.log("should be deleted?");
-    // await placeToRemove.save();
     res.status(200).json({response: placeToRemove});
   } catch (error) {
     console.log(error);
