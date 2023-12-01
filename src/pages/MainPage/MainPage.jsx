@@ -3,7 +3,7 @@ import tokenService from '../../utils/tokenService';
 import { Grid, Segment } from 'semantic-ui-react';
 import AddLocation from '../../components/AddLocation/AddLocation';
 import HeroCard from '../../components/HeroCard/HeroCard'
-import Locations from '../../components/Locations/Locations';
+import LocationCards from '../../components/LocationCards/LocationCards';
 import Topper from '../../components/Topper/Topper';
 
 export default function MainPage({ currentUser, logout }) {
@@ -68,7 +68,7 @@ export default function MainPage({ currentUser, logout }) {
         user.weather = friendsWeathers[idx];
 
         // what i need to render on the Location Card: temp, description, icon
-        console.log(`It's ${user.weather.main.temp} and ${user.weather.weather[0].description} (${user.weather.weather[0].icon}, if i want it)`)
+        // console.log(`It's ${user.weather.main.temp} and ${user.weather.weather[0].description} (${user.weather.weather[0].icon}, if i want it)`)
 
         return user;
       }
@@ -123,13 +123,13 @@ export default function MainPage({ currentUser, logout }) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
-          <Locations
+          <LocationCards
             getWeather={getWeather}
             friendLocations={friendLocations}
             getLocations={getLocations}
             sanitizeFirstName={sanitizeFirstName}
           >
-          </Locations>
+          </LocationCards>
         </Grid.Column>
       </Grid.Row>
     </Grid>
