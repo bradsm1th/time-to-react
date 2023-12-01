@@ -12,6 +12,11 @@ You can add other locations / other people to see their weather, as well. My ori
 </figure> -->
 
 <figure>
+<figcaption><strong>The signup page</strong></figcaption>
+<img src="https://i.imgur.com/alV7JP5.png" alt="the signup page">
+</figure> 
+
+<figure>
 <figcaption><strong>The main view</strong></figcaption>
 <img src="https://i.imgur.com/xRe9zJW.png" alt="the main view">
 </figure>
@@ -47,3 +52,11 @@ The initial goal was `CR_D` functionality, so it would be nice to add the abilit
 
 ### Geolocation API
 This would be a fun and easy way to automatically update the logged-in user's location. I've only used it once before (and not recently) and simply ran out of time to implement it.
+
+### Miscellaneous
+- embed fonts (current is IA Writer Duospace)
+- more color
+- some hover/animation effects
+- multiple ways to view friend data (text only, icon only, Celsius instead of Fahrenheit, etc.)
+
+---
