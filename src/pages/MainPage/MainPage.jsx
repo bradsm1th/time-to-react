@@ -1,32 +1,31 @@
 import { useState, useEffect } from 'react';
 import tokenService from '../../utils/tokenService';
-import { Grid, Button, Card, Segment, Form } from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 import AddLocation from '../../components/AddLocation/AddLocation';
 import HeroCard from '../../components/HeroCard/HeroCard'
 import Locations from '../../components/Locations/Locations';
 import Topper from '../../components/Topper/Topper';
-import { KtoF } from '../../utils/tempConversions'
-
 
 export default function MainPage({ currentUser, logout }) {
-
-  // console.log(currentUser, "<- currentUser in MainPage");
 
   const [userLocation, setUserLocation] = useState({});
   const [friendLocations, setFriendLocations] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // loads current user's weather on first render
     getLoggedInUserWeather();
+    // loads current user's buddies (and their weather) on first render
     getLocations();
   }, [])
 
+  // fetches weather for current user and sets it in state
   async function getLoggedInUserWeather() {
     let userWeather = await getWeather(currentUser.homeLocation)
     setUserLocation(userWeather);
-
   }
 
+  // fetches weather for the given city. returns an object.
   async function getWeather(city) {
     try {
       setLoading(true);
@@ -35,22 +34,7 @@ export default function MainPage({ currentUser, logout }) {
       });
       const answer = await weather.json();
 
-      // console.log("=====================")
-      // console.log(answer, "<-- EVERYTHING")
-      // console.log("=====================")
-
-      console.log(answer.weather, "<-- weather")
-      console.log(answer.name, "<-- name")
-      // console.log(answer.sys.country, "<-- country")
-      // console.log(answer.main.temp + " K", "<-- temp in K")
-      console.log(KtoF(answer.main.temp).toFixed(0) + "ºF", "<-- temp in F")
-      // console.log(answer.weather[0].icon, "<- icon prefix")
-      // console.log(answer.dt, "<-- most recent update time in seconds")
-      // console.log((Date.now() / 1000).toFixed(0), "<-- now, in MS")
-      // console.log((Date.now() / 1000).toFixed(0) - answer.dt)
-
       setLoading(false);
-      // setUserLocation(answer);
       return answer;
 
     } catch (error) {
@@ -58,6 +42,7 @@ export default function MainPage({ currentUser, logout }) {
     }
   }
 
+  // gets locations a user has added
   async function getLocations() {
     try {
       const response = await fetch("/api/locations", {
@@ -66,14 +51,35 @@ export default function MainPage({ currentUser, logout }) {
           Authorization: "Bearer " + tokenService.getToken()
         }
       })
-      const answer = await response.json();
-      console.log(answer, "<- answer, aka server response to 'getLocations' req");
-      setFriendLocations(answer.locations);
+      // this is all the Mongo documents that the logged-in user has added. 
+      // [ {}, {}, ... ]
+      const allAddedFriends = await response.json();
+
+      // fetches weather for each city in the array of friends
+      const friendsWeathersForAPI = allAddedFriends.locations.map(location =>
+        getWeather(location.cityName)
+      )
+
+      // returns results of API call, one for each location 
+      const friendsWeathers = await Promise.all(friendsWeathersForAPI)
+
+      // replaces "friends" state with same but adding results of API call to .weather property
+      setFriendLocations(() => allAddedFriends.locations.map((user, idx) => {
+        user.weather = friendsWeathers[idx];
+
+        // what i need to render on the Location Card: temp, description, icon
+        console.log(`It's ${user.weather.main.temp} and ${user.weather.weather[0].description} (${user.weather.weather[0].icon}, if i want it)`)
+
+        return user;
+      }
+
+      ));
     } catch (error) {
       console.log(error);
     }
   }
 
+  // just makes sure 'bRAD' and 'brad' always shows as 'Brad'
   function sanitizeFirstName(name) {
     return name.slice(0, 1).toUpperCase() + name.slice(1,).toLowerCase();
   }
@@ -85,7 +91,7 @@ export default function MainPage({ currentUser, logout }) {
   }
 
   return (
-    <Grid columns={1} style={{ width: 800 }}>
+    <Grid columns={1} style={{ maxWidth: 1200 }}>
       <Grid.Row>
         <Grid.Column>
           <Topper

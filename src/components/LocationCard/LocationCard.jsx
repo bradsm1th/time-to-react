@@ -1,14 +1,11 @@
-import { Header, Divider, Card } from 'semantic-ui-react';
+import { Divider, Card } from 'semantic-ui-react';
 import tokenService from '../../utils/tokenService';
+import { KtoF } from '../../utils/tempConversions'
 
-export default function LocationCard({ location, getLocations, sanitizeFirstName }) {
-
-  console.log(location, "<- location prop in LocationCard")
+export default function LocationCard({ location, friendLocations, getLocations, sanitizeFirstName }) {
 
   async function handleDelete(evt) {
-    // console.log(evt.target, "<- just clicked");
     evt.preventDefault();
-    console.log(`I need to delete the Location Doc in Mongo with _id: ${evt.target.id} …`)
 
     try {
       const response = await fetch(`/api/locations/${evt.target.id}`, {
@@ -22,26 +19,29 @@ export default function LocationCard({ location, getLocations, sanitizeFirstName
       // update state
       getLocations();
 
-
     } catch (error) {
       console.log(error);
     }
-
   }
 
+  // console.log(`It's ${user.weather.main.temp} and ${user.weather.weather[0].description} (${user.weather.weather[0].icon}, if i want it)`)
+
   return (
+    friendLocations.map(friend =>
       <Card>
         <Card.Content>
+            <Card.Header>{friend.residentName}</Card.Header>
           <Divider horizontal>
-            <Card.Header>{location.residentName}</Card.Header>
-            {/* <p style={{color: 'crimson'}}>Delete this person</p> */}
+            <Card.Header as='h1'>
+              {KtoF(friend.weather.main.temp).toFixed(0) + "º F"} 
+              {/* <img src={`https://openweathermap.org/img/wn/${friend.weather.weather[0].icon}@2x.png`} alt={friend.weather.weather[0].description} /> */}
+            </Card.Header>
           </Divider>
           <Card.Meta>
-            {/* {location.residentName} is  */}
-            One of {sanitizeFirstName(location.addedBy.username)}'s people
+          {friend.cityName}
           </Card.Meta>
           <Card.Description>
-            <strong>{location.cityName}</strong>
+           {friend.weather.weather[0].description.slice(0,1).toUpperCase() + friend.weather.weather[0].description.slice(1,)}
           </Card.Description>
           <Card.Description>
             <form
@@ -54,6 +54,6 @@ export default function LocationCard({ location, getLocations, sanitizeFirstName
           </Card.Description>
         </Card.Content>
       </Card>
-
+    )
   )
 }

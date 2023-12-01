@@ -19,7 +19,6 @@ export default function AddLocation({ friendLocations, setFriendLocations, getLo
   }
 
   async function addLocation(locationOffForm) {
-    console.log("about to make POST fetch for new location");
 
     try {
       const response = await fetch('/api/locations', {
@@ -65,22 +64,10 @@ export default function AddLocation({ friendLocations, setFriendLocations, getLo
 
   return (
     <>
-      {/* <h2>I'm the 'add a new location' form!</h2> */}
-      <p>Add a friend's location so you can check their weather, too...</p>
-
+      <h3>Add a friend's location so you can check their weather, too...</h3>
       <Form onSubmit={handleSubmit}>
-        <Form.Field inline required>
-          <label>City, State (or City, Province)</label>
-          <Input
-            name='cityName'
-            value={nextLocation.cityName}
-            onChange={handleChange}
-            type='text'
-            required
-          />
-        </Form.Field>
-        <Form.Field inline required>
-          <label>Name of friend who lives there</label>
+        <Form.Field required align='left'  style={{width: '50%', marginInline: 'auto'}}>
+          <label>Name of friend</label>
           <Input
             name='residentName'
             value={nextLocation.residentName}
@@ -89,11 +76,18 @@ export default function AddLocation({ friendLocations, setFriendLocations, getLo
             required
           />
         </Form.Field>
-
-        <Button type='submit'>Track 'em!</Button>
-
+        <Form.Field required align='left' style={{width:'50%', margin: '0 auto'}}>
+          <label>City, State (City, Province)</label>
+          <Input
+            name='cityName'
+            value={nextLocation.cityName}
+            onChange={handleChange}
+            type='text'
+            required
+          />
+        </Form.Field>
+        <Button type='submit' style={{marginBlockStart: '1em'}}>Track 'em!</Button>
       </Form>
-
     </>
   )
 }
