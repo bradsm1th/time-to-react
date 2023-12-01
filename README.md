@@ -2,38 +2,18 @@
 This is a simple weather app using Openweather's ["Current Weather Data" API](https://openweathermap.org/current).
 
 After signing up, the app shows the most recent temperature and conditions for **your** location.
-You can also add other locations / other people. My original goal was to see what the weather is like for my family members "right now". 
+You can add other locations / other people to see their weather, as well. My original goal was to see what the weather is like for my friends and family members "right now". 
 
 ## Screenshots
 
-<figure>
-<figcaption>The landing page</figcaption>
-<!-- <img src="https://i.imgur.com/Ci3hVRy.png" alt="the 'landing' view"> -->
-</figure>
+<!-- <figure>
+<figcaption>The login page</figcaption>
+<img src="https://i.imgur.com/UAGkVGG.png" alt="the login page">
+</figure> -->
 
 <figure>
-<figcaption><small>Viewing everyone's quotes</small></figcaption>
-<!-- <img src="https://i.imgur.com/xr9o3fu.png" alt="the 'everyone\'s quotes' view"> -->
-</figure>
-
-<figure>
-<figcaption><small>Viewing all your quotes and their annotations</small></figcaption>
-<!-- <img src="https://i.imgur.com/mKPtuxw.png" alt="the 'index' view"> -->
-</figure>
-
-<figure>
-<figcaption><small>Adding a quote</small></figcaption>
-<!-- <img src="https://i.imgur.com/K0jfjVy.png" alt="the 'create' view"> -->
-</figure>
-
-<figure>
-<figcaption><small>Updating a quote</small></figcaption>
-<!-- <img src="https://i.imgur.com/GVmQSFK.png" alt="the 'update' view"> -->
-</figure>
-
-<figure>
-<figcaption><small>Viewing a quote, adding annotations, and deleting a quote</small></figcaption>
-<!-- <img src="https://i.imgur.com/hGXg8Zh.png" alt="the 'show' view"> -->
+<figcaption><strong>The main view</strong></figcaption>
+<img src="https://i.imgur.com/xRe9zJW.png" alt="the main view">
 </figure>
 
 ## Technologies Used
@@ -49,7 +29,9 @@ You can also add other locations / other people. My original goal was to see wha
 
 ## Getting Started
 
-To try for yourself, just visit the hosted version:
+The app is currently not hosted, but if you clone the repo and run `npm install`, you'll be able to try for yourself.
+
+**Note**: You will need a free API key from Openweather.
 
 <!-- [Commonplace Book](https://anxious-lion-tank-top.cyclic.app/) -->
 
@@ -61,7 +43,7 @@ Since this service is both **1)** US-only[^1] and **2)** a second API, I've shel
 [^1]: Many of my initial tests involved people in other countries, so I chose Openweather's API.
 
 ### Update
-The initial goal was `CR_D` functionality, so it would be nice to add the ability to update your name or location, or to fetch more recent weather data.
+The initial goal was `CR_D` functionality, so it would be nice to add the ability to update your name or location, or to fetch the most recent weather data.
 
 ### Geolocation API
 This would be a fun and easy way to automatically update the logged-in user's location. I've only used it once before (and not recently) and simply ran out of time to implement it.
