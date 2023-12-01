@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 // One user has/tracks many locations 
-// One post belongs to one user
 const locationSchema = new mongoose.Schema({
   residentName: {
     type: String,
@@ -15,8 +14,7 @@ const locationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   }
-  // currentTemp: Number,
-  // openWeatherID: Number,
+  // rest of location data (temp, conditions, etc) will come from API call ( MainPage > getLocations() )
 }, {
   timestamps: true
 });

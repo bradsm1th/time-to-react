@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Form, Input, Button } from 'semantic-ui-react';
 import tokenService from '../../utils/tokenService';
 
-export default function AddLocation({ friendLocations, setFriendLocations, getLocations }) {
+export default function AddLocation({ getLocations }) {
   const [nextLocation, setNextLocation] = useState({
     cityName: '',
     residentName: '',
@@ -32,7 +32,6 @@ export default function AddLocation({ friendLocations, setFriendLocations, getLo
       });
       const answer = await response.json();
       console.log(answer, "<- answer from addLocation to server");
-      // setFriendLocations([...friendLocations, answer])
 
     }
     catch (error) {
@@ -45,7 +44,6 @@ export default function AddLocation({ friendLocations, setFriendLocations, getLo
     evt.preventDefault();
 
     try {
-      // console.log("hit handleSubmit try")
       addLocation(nextLocation);
       console.log(nextLocation, "<- should be next location to add")
       getLocations();

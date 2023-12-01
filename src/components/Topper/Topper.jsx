@@ -1,13 +1,9 @@
-import { Header, Sticky } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 export default function Topper({ currentUser, logout }) {
 
-  // console.log(logout);
-  // console.log(currentUser, "<- currentUser in 'Topper'")
-
   return (
-    // <Segment>
     <>
         <Header
           as='h1'
@@ -22,6 +18,5 @@ export default function Topper({ currentUser, logout }) {
         }
         <hr style={{marginBlockEnd: '2em'}}/>
     </>
-    // </Segment>
   )
 }

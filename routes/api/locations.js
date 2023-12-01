@@ -6,6 +6,6 @@ const locationsController = require("../../controllers/locations");
 router.post('/', locationsController.create);
 router.get('/', locationsController.index);
 router.delete('/:id', locationsController.deletePlace);
-/*---------- Protected Routes ----------*/
 
+/*---------- Protected Routes ----------*/
 module.exports = router;

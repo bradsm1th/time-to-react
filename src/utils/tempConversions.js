@@ -1,7 +1,7 @@
 // Kelvin to Fahrenheit
-// …https://www.wikihow.com/Convert-Kelvin-to-Fahrenheit-or-Celsius
-export function KtoF(tempInK) {
-  return 1.8 * (tempInK - 273) + 32;
+// … https://www.wikihow.com/Convert-Kelvin-to-Fahrenheit-or-Celsius
+export function KtoF(tempInKelvin) {
+  return 1.8 * (tempInKelvin - 273) + 32;
 }
 
 

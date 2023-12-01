@@ -2,7 +2,7 @@ import { Divider, Card } from 'semantic-ui-react';
 import tokenService from '../../utils/tokenService';
 import { KtoF } from '../../utils/tempConversions'
 
-export default function LocationCard({ location, friendLocations, getLocations, sanitizeFirstName }) {
+export default function LocationCard({ location, friendLocations, getLocations }) {
 
   async function handleDelete(evt) {
     evt.preventDefault();
@@ -24,8 +24,6 @@ export default function LocationCard({ location, friendLocations, getLocations, 
     }
   }
 
-  // console.log(`It's ${user.weather.main.temp} and ${user.weather.weather[0].description} (${user.weather.weather[0].icon}, if i want it)`)
-
   return (
     friendLocations.map(friend =>
       <Card>
@@ -34,7 +32,10 @@ export default function LocationCard({ location, friendLocations, getLocations, 
           <Divider horizontal>
             <Card.Header as='h1'>
               {KtoF(friend.weather.main.temp).toFixed(0) + "º F"} 
+              
+              {/* if you want to show the icon  */}
               {/* <img src={`https://openweathermap.org/img/wn/${friend.weather.weather[0].icon}@2x.png`} alt={friend.weather.weather[0].description} /> */}
+              
             </Card.Header>
           </Divider>
           <Card.Meta>

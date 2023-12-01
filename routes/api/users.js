@@ -7,10 +7,7 @@ router.post("/signup", usersController.signup);
 router.post("/login", usersController.login);
 
 /*---------- Protected Routes ----------*/
-
 module.exports = router;
-
-
 
 /*---------- Protected Routes ----------*/
 

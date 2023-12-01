@@ -3,8 +3,6 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/users/';
 
 function signup(user) {
-  // console.log("hitting user service dot signup");
-  // console.log(user, "<- user, being sent in fetch")
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
@@ -20,8 +18,6 @@ function signup(user) {
   })
   // Parameter destructuring!
   .then(({token}) => tokenService.setToken(token));
-  // The above could have been written as
-  //.then((token) => token.token);
 }
 
 function getUser() {

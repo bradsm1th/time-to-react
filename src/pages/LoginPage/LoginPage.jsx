@@ -3,11 +3,8 @@ import './LoginPage.css';
 import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react';
 import Topper from "../../components/Topper/Topper";
-
-import { Grid, Segment, Form, Input, Button } from 'semantic-ui-react';
-
+import { Form, Input, Button } from 'semantic-ui-react';
 import userService from '../../utils/userService';
-
 
 export default function LoginPage({ processSignupOrLogin}) {
   const [loggingPerson, setLoggingPerson] = useState({
@@ -27,7 +24,6 @@ export default function LoginPage({ processSignupOrLogin}) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-
     try {
       // see if user's token 1) exists and 2) is valid for this user's name/PW
       await userService.login(loggingPerson);
@@ -38,7 +34,6 @@ export default function LoginPage({ processSignupOrLogin}) {
       console.log(error, "<-login handlesubmit error")
     }
   }
-
 
   return (
     <>
@@ -67,7 +62,7 @@ export default function LoginPage({ processSignupOrLogin}) {
             />
           </Form.Field>
           <Button type='submit' align='center' color='orange' inverted size='medium'>Log in</Button>
-        {/* {error ? <ErrorMessage error={error} /> : null} */}
+        {error ? <ErrorMessage error={error} /> : null}
         </Form>
         <p style={{paddingBlockStart:"1em"}}>Need to <Link to="/signup">sign up</Link> first?</p>
     </>

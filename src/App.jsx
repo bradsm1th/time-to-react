@@ -1,28 +1,21 @@
 import { useState } from 'react';
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
-
 import userService from "./utils/userService"
-
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from './pages/SignupPage/SignupPage'
 import MainPage from './pages/MainPage/MainPage'
-
 
 export default function App() {
   // grab valid user's token from local storage, and do it *here* so other components can receive that info
   const [user, setUser] = useState(userService.getUser());
 
-
   function processSignupOrLogin() {
     setUser(userService.getUser());
   }
 
-
   function logout() {
-    // console.log("logout should be happening…")
     userService.logout();
-    // console.log("logout should've just happened…")
     setUser(null);
   }
 

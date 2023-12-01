@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
 import Topper from "../../components/Topper/Topper";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage"
-import { Grid, Segment, Form, Input, Button } from 'semantic-ui-react';
-
-
+import { Form, Input, Button } from 'semantic-ui-react';
 import userService from '../../utils/userService';
 
 export default function SignupPage({ processSignupOrLogin}) {
@@ -18,7 +16,6 @@ export default function SignupPage({ processSignupOrLogin}) {
   });
 
   const [error, setError] = useState('');
-
   const navigate = useNavigate();
 
   // handlers
@@ -31,7 +28,6 @@ export default function SignupPage({ processSignupOrLogin}) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // console.log("submitted!");
 
     try {
       // no formData object needed (no file to upload)
@@ -40,7 +36,7 @@ export default function SignupPage({ processSignupOrLogin}) {
       navigate('/');
     } catch (error) {
       console.log(error.message, "<- caught error"); // <- the error message comes from the throw statement in utils/signup functions
-      // setError('Try signing up again')
+      setError('Try signing up again')
     }
   }
 
@@ -101,7 +97,7 @@ export default function SignupPage({ processSignupOrLogin}) {
             />
           </Form.Field>
           <Button type='submit' align='center' color='teal' size='medium'>Sign up</Button>
-        {/* {error ? <ErrorMessage error={error} /> : null} */}
+        {error ? <ErrorMessage error={error} /> : null}
         </Form>
         <p style={{paddingBlockStart:"1em"}}>Already done this? <Link to="/login">Log in</Link> instead!</p>
     </>
