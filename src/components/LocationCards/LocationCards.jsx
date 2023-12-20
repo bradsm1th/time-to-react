@@ -35,7 +35,7 @@ export default function LocationCards({ friendLocations, getLocations }) {
           <p style={{ fontSize: "2em" }}>{KtoF(friend.weather.main.temp).toFixed(0) + "º F"}</p>
 
           {/* if you want to show the icon  */}
-          {/* <img src={`https://openweathermap.org/img/wn/${friend.weather.weather[0].icon}@2x.png`} alt={friend.weather.weather[0].description} /> */}
+          <img src={`https://openweathermap.org/img/wn/${friend.weather.weather[0].icon}@2x.png`} alt={friend.weather.weather[0].description} />
 
         </Card.Header>
         <Card.Meta>
