@@ -1,4 +1,4 @@
-# Weather (or not)
+# Weather (or not) [Single-page React App]
 This is a simple weather app using Openweather's ["Current Weather Data" API](https://openweathermap.org/current).
 
 After signing up, the app shows the most recent temperature and conditions for **your** location.
