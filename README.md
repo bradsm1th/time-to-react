@@ -34,7 +34,7 @@ You can add other locations / other people to see their weather, as well. My ori
 
 ## Getting Started
 
-The app is currently not hosted, but if you clone the repo and run `npm install`, you'll be able to try for yourself.
+The app is currently not hosted, but if you fork and clone the repo and run `npm install`, you'll be able to try for yourself.
 
 **Note**: You will need a free API key from Openweather.
 
